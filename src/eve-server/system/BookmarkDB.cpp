@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -229,30 +229,30 @@ bool BookmarkDB::DeleteBookmarkFromDatabase(uint32 ownerID, uint32 bookmarkID)
 
 bool BookmarkDB::DeleteBookmarksFromDatabase(uint32 ownerID, std::vector<unsigned long> *bookmarkList)
 {
-	DBerror err;
-	bool ret = true;
-	std::stringstream st;
-	std::string listString;
-	size_t i, size;
+    DBerror err;
+    bool ret = true;
+    std::stringstream st;
+    std::string listString;
+    uint32 i, size;
 
-	size = bookmarkList->size();
-	for (i = 0; i < size; i++)
-	{
-		st << bookmarkList->at(i);
-		if (i < (size - 1))
-			st << ", ";
-	}
+    size = bookmarkList->size();
+    for(i=0; i<size; i++)
+    {
+        st << bookmarkList->at(i);
+        if (i<(size-1))
+            st << ", ";
+    }
 
-	if (!sDatabase.RunQuery(err,
-		" DELETE FROM bookmarks "
-		" WHERE ownerID = %u AND bookmarkID IN (%s)", ownerID, st.str().c_str()
-		))
-	{
-		sLog.Error("BookmarkDB::DeleteBookmarksFromDatabase()", "Error in query: %s", err.c_str());
-		ret = false;
-	}
+    if (!sDatabase.RunQuery(err,
+        " DELETE FROM bookmarks "
+        " WHERE ownerID = %u AND bookmarkID IN (%s)", ownerID, st.str().c_str()
+        ))
+    {
+        sLog.Error( "BookmarkDB::DeleteBookmarksFromDatabase()", "Error in query: %s", err.c_str() );
+        ret = false;
+    }
 
-	return ret;
+    return ret;
 }
 
 

@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -524,8 +524,8 @@ bool AttributeMap::ResetAttribute(uint32 attrID, bool notify)
     EvilNumber attrVal;
     uint32 attributeID;
 
-    size_t amount = res.GetRowCount();
-    for (size_t i = 0; i < amount; i++)
+    int amount = res.GetRowCount();
+    for (int i = 0; i < amount; i++)
     {
         res.GetRow(row);
         attributeID = row.GetUInt(1);
@@ -576,8 +576,8 @@ bool AttributeMap::Load()
 
     DBResultRow row;
 
-    size_t amount = res.GetRowCount();
-    for (size_t i = 0; i < amount; i++)
+    int amount = res.GetRowCount();
+    for (int i = 0; i < amount; i++)
     {
         EvilNumber attr_value;
         res.GetRow(row);

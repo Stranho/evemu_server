@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -375,12 +375,12 @@ void SystemBubble::_SendAddBalls( SystemEntity* to_who )
     _log( DESTINY__TRACE, "Add Balls:" );
     addballs.Dump( DESTINY__TRACE, "    " );
     _log( DESTINY__TRACE, "    Ball Binary:" );
-    _hex( DESTINY__TRACE, &(	addballs.destiny_binary->content() )[0],
-								(uint32)addballs.destiny_binary->content().size() );
+    _hex( DESTINY__TRACE, &( addballs.destiny_binary->content() )[0],
+                          addballs.destiny_binary->content().size() );
 
     _log( DESTINY__TRACE, "    Ball Decoded:" );
-    Destiny::DumpUpdate( DESTINY__TRACE, &(	addballs.destiny_binary->content() )[0],
-											(uint32)addballs.destiny_binary->content().size() );
+    Destiny::DumpUpdate( DESTINY__TRACE, &( addballs.destiny_binary->content() )[0],
+                                         addballs.destiny_binary->content().size() );
 
     PyTuple* t = addballs.Encode();
     to_who->QueueDestinyUpdate( &t );    //may consume, but may not.
@@ -506,6 +506,7 @@ void SystemBubble::_BubblecastRemoveBall(SystemEntity *about_who) {
 
     PyTuple *tmp = removeball.Encode();
     BubblecastDestinyUpdate(&tmp, "RemoveBall");    //consumed
+    PySafeDecRef( tmp );
 }
 
 
@@ -525,4 +526,5 @@ void SystemBubble::_BubblecastRemoveBallExclusive(SystemEntity *about_who) {
 
     PyTuple *tmp = removeball.Encode();
     BubblecastDestinyUpdateExclusive(&tmp, "RemoveBall", about_who);    //consumed
+    PySafeDecRef( tmp );
 }

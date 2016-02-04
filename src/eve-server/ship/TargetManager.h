@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -53,7 +53,7 @@ public:
     SystemEntity *GetFirstTarget(bool need_locked);
     bool HasNoTargets() const { return(m_targets.empty()); }
     bool IsTargetedBySomething() const { return(!m_targetedBy.empty()); }
-    uint32 GetTotalTargets() const { return (uint32)m_targets.size(); }
+    uint32 GetTotalTargets() const { return m_targets.size(); }
 
     SystemEntity *GetTarget(uint32 targetID, bool need_locked=true) const;
     void QueueTBDestinyEvent(PyTuple **up) const;    //queue a destiny event to all people targeting me.

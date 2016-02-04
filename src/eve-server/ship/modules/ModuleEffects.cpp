@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -189,7 +189,7 @@ void MEffect::_Populate(uint32 effectID)
 			if( !(targetGroupIDs.empty()) )
 			{
 				// targetGroupIDs string is not empty, so extract one number at a time until it is empty
-				size_t pos = 0;
+				int pos = 0;
 				std::string tempString = "";
 
 				pos = targetGroupIDs.find_first_of(';');
@@ -314,7 +314,7 @@ void SkillBonusModifier::_Populate(uint32 skillID)
 			if( !(targetGroupIDs.empty()) )
 			{
 				// targetGroupIDs string is not empty, so extract one number at a time until it is empty
-				size_t pos = 0;
+				int pos = 0;
 				std::string tempString = "";
 
 				pos = targetGroupIDs.find_first_of(';');
@@ -436,7 +436,7 @@ void ShipBonusModifier::_Populate(uint32 shipID)
 			if( !(targetGroupIDs.empty()) )
 			{
 				// targetGroupIDs string is not empty, so extract one number at a time until it is empty
-				size_t pos = 0;
+				int pos = 0;
 				std::string tempString = "";
 
 				pos = targetGroupIDs.find_first_of(';');
@@ -581,7 +581,7 @@ void DGM_Effects_Table::_Populate()
 	if( error_count > 0 )
 		sLog.Error("DGM_Effects_Table::_Populate()","ERROR Populating the DGM_Effects_Table memory object: %u of %u effects failed to load!", error_count, total_effect_count);
 
-	sLog.Log("DGM_Effects_Table", "..........%u total effects objects loaded", total_effect_count);
+	sLog.Log("DGM_Effects_Table", "%u total effects objects loaded", total_effect_count);
 
     //cleanup
     delete res;
@@ -646,7 +646,7 @@ void DGM_Type_Effects_Table::_Populate()
 	if( error_count > 0 )
 		sLog.Error("DGM_Type_Effects_Table::_Populate()","ERROR Populating the DGM_Type_Effects_Table memory object: %u of %u types failed to load!", error_count, total_type_count);
 
-	sLog.Log("DGM_Type_Effects_Table", "..........%u total type effect objects loaded", total_type_count);
+	sLog.Log("DGM_Type_Effects_Table", "%u total type effect objects loaded", total_type_count);
 
     //cleanup
     delete res;
@@ -717,7 +717,7 @@ void DGM_Skill_Bonus_Modifiers_Table::_Populate()
 	if( error_count > 0 )
 		sLog.Error("DGM_Skill_Bonus_Modifiers_Table::_Populate()","ERROR Populating the DGM_Skill_Bonus_Modifiers_Table memory object: %u of %u skill bonus modifiers failed to load!", error_count, total_modifier_count);
 
-	sLog.Log("DGM_Skill_Bonus_Modifiers_Table", "..........%u total modifier objects loaded", total_modifier_count);
+	sLog.Log("DGM_Skill_Bonus_Modifiers_Table", "%u total modifier objects loaded", total_modifier_count);
 
     //cleanup
     delete res;
@@ -788,7 +788,7 @@ void DGM_Ship_Bonus_Modifiers_Table::_Populate()
 	if( error_count > 0 )
 		sLog.Error("DGM_Ship_Bonus_Modifiers_Table::_Populate()","ERROR Populating the DGM_Ship_Bonus_Modifiers_Table memory object: %u of %u ship bonus modifiers failed to load!", error_count, total_modifier_count);
 
-	sLog.Log("DGM_Ship_Bonus_Modifiers_Table", "..........%u total modifier objects loaded", total_modifier_count);
+	sLog.Log("DGM_Ship_Bonus_Modifiers_Table", "%u total modifier objects loaded", total_modifier_count);
 
     //cleanup
     delete res;
@@ -994,8 +994,8 @@ void ModuleEffects::_populate(uint32 typeID)
 					if( moduleStateWhenEffectApplied == MOD_UNFITTED )
 						sLog.Error("ModuleEffects::_populate()", "Illegal value '%u' obtained from the 'effectAppliedInState' field of the 'dgmEffectsInfo' table", mEffectPtr->GetModuleStateWhenEffectApplied());
 
-					//if( moduleStateWhenEffectApplied & MOD_OFFLINE )
-					//	;	// nothing
+					if( moduleStateWhenEffectApplied & MOD_OFFLINE )
+						;	// nothing
 
 					if( moduleStateWhenEffectApplied & MOD_ONLINE )
 						m_OnlineEffects.insert(std::pair<uint32, MEffect *>(effectID,mEffectPtr));
@@ -1012,8 +1012,8 @@ void ModuleEffects::_populate(uint32 typeID)
 					if( moduleStateWhenEffectApplied & MOD_FLEET )
 						m_FleetEffects.insert(std::pair<uint32, MEffect *>(effectID,mEffectPtr));
 
-					//if( moduleStateWhenEffectApplied & MOD_DEACTIVATING )
-					//	;	// nothing
+					if( moduleStateWhenEffectApplied & MOD_DEACTIVATING )
+						;	// nothing
 				}
 			}
         }

@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -62,7 +62,7 @@ DBRowDescriptor::DBRowDescriptor( const DBResultRow& row )
 
 uint32 DBRowDescriptor::ColumnCount() const
 {
-    return (uint32)_GetColumnList()->size();
+    return _GetColumnList()->size();
 }
 
 PyString* DBRowDescriptor::GetColumnName( uint32 index ) const

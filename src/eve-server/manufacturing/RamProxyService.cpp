@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -238,8 +238,8 @@ PyResult RamProxyService::Handle_InstallJob(PyCallArgs &call) {
             // consume required materials
             for(; curi != endi; curi++) {
                 if((*curi)->typeID() == cur->typeID && (*curi)->ownerID() == call.client->GetCharacterID()) {
-                    if(qtyNeeded >= (uint32)(*curi)->quantity()) {
-                        qtyNeeded -= (uint32)(*curi)->quantity();
+                    if(qtyNeeded >= (*curi)->quantity()) {
+                        qtyNeeded -= (*curi)->quantity();
                         (*curi)->Delete();
                     } else {
                         (*curi)->AlterQuantity(-(int32)qtyNeeded);
@@ -729,7 +729,7 @@ void RamProxyService::_VerifyInstallJob_Install(const Rsp_InstallJob &rsp, const
                 if(    (*curi)->typeID() == cur->typeID
                     && (*curi)->ownerID() == c->GetCharacterID()
                 ) {
-                    if((uint32)(*curi)->quantity() < qtyNeeded)
+                    if((*curi)->quantity() < qtyNeeded)
                         qtyNeeded -= (*curi)->quantity();
                     else
                         break;

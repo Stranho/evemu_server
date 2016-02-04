@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -185,9 +185,9 @@ PyResult MarketProxyService::Handle_GetOrders(PyCallArgs &call) {
     method_name += itoa(args.arg);
     ObjectCachedMethodID method_id(GetName(), method_name.c_str());
 
-#   pragma message( "TODO: temporary solution, make cache objects with arguments" )
+    //TODO: temporary solution, make cache objects with arguments
 
-#    pragma message("TODO: need to check if cache is refreshed when marker orders change.")
+    //TODO: need to check if cache is refreshed when marker orders change.
 //    m_manager->cache_service->InvalidateCache(method_id);
 
     //check to see if this method is in the cache already.
@@ -395,7 +395,7 @@ PyResult MarketProxyService::Handle_PlaceCharOrder(PyCallArgs &call) {
         }
 
         if((item->singleton() && args.quantity != 1)
-           || item->quantity() < args.quantity ) {
+           || item->quantity() < (uint32)args.quantity ) {
             codelog(MARKET__ERROR, "%s: Tried to sell %d of item %d which has qty %d singleton %d", call.client->GetName(), args.quantity, item->itemID(), item->quantity(), item->singleton());
             call.client->SendErrorMsg("You cannot sell more than you have.");
             return NULL;

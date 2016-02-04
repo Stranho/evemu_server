@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -48,10 +48,10 @@ bool DeflateData( const Buffer& input, Buffer& output )
 {
     const Buffer::iterator<uint8> out = output.end<uint8>();
 
-    size_t outputSize = compressBound( (uLong)input.size() );
+    size_t outputSize = compressBound( input.size() );
     output.ResizeAt( out, outputSize );
 
-    int res = compress( &*out, (uLongf*)&outputSize, &input[0], (uLong)input.size() );
+    int res = compress( &*out, (uLongf*)&outputSize, &input[0], input.size() );
 
     if( Z_OK == res )
     {
@@ -88,7 +88,7 @@ bool InflateData( const Buffer& input, Buffer& output )
         outputSize = ( input.size() << ++sizeMultiplier );
         output.ResizeAt( out, outputSize );
 
-        res = uncompress( &*out, (uLongf*)&outputSize, &input[0], (uLong)input.size() );
+        res = uncompress( &*out, (uLongf*)&outputSize, &input[0], input.size() );
     } while( Z_BUF_ERROR == res );
 
     if( Z_OK == res )

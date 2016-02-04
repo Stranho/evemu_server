@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -60,11 +60,11 @@ void build_hex_line( const uint8* buffer, size_t length, size_t offset, char* re
     snprintf( ret, length, "  | %.16s", printable );
 }
 
-void pfxHexDump( const char* pfx, FILE* into, const uint8* data, size_t length )
+void pfxHexDump( const char* pfx, FILE* into, const uint8* data, uint32 length )
 {
     char buffer[80];
 
-    for(size_t offset = 0; offset < length; offset += 16 )
+    for( uint32 offset = 0; offset < length; offset += 16 )
     {
         build_hex_line( data, length, offset, buffer, 4 );
 
@@ -72,11 +72,11 @@ void pfxHexDump( const char* pfx, FILE* into, const uint8* data, size_t length )
     }
 }
 
-void pfxHexDump( const char* pfx, LogType type, const uint8* data, size_t length )
+void pfxHexDump( const char* pfx, LogType type, const uint8* data, uint32 length )
 {
     char buffer[80];
 
-    for( size_t offset = 0; offset < length; offset += 16 )
+    for( uint32 offset = 0; offset < length; offset += 16 )
     {
         build_hex_line( data, length, offset, buffer, 4 );
 
@@ -84,7 +84,7 @@ void pfxHexDump( const char* pfx, LogType type, const uint8* data, size_t length
     }
 }
 
-void pfxHexDumpPreview( const char* pfx, FILE* into, const uint8* data, size_t length )
+void pfxHexDumpPreview( const char* pfx, FILE* into, const uint8* data, uint32 length )
 {
     char buffer[80];
 
@@ -100,7 +100,7 @@ void pfxHexDumpPreview( const char* pfx, FILE* into, const uint8* data, size_t l
         pfxHexDump( pfx, into, data, length );
 }
 
-void pfxHexDumpPreview( const char* pfx, LogType type, const uint8* data, size_t length )
+void pfxHexDumpPreview( const char* pfx, LogType type, const uint8* data, uint32 length )
 {
     char buffer[80];
 

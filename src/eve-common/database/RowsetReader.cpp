@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -34,9 +34,9 @@
 /************************************************************************/
 size_t BaseRowsetReader::FindColumn( const char* name )
 {
-    const size_t cc = columnCount();
+    const uint32 cc = columnCount();
 
-    for(size_t i = 0; i < cc; ++i )
+    for( uint32 i = 0; i < cc; ++i )
     {
         if( 0 == strcmp( name, columnName( i ) ) )
             return i;

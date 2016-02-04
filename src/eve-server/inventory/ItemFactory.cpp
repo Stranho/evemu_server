@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -42,7 +42,7 @@ ItemFactory::~ItemFactory() {
     // items
     {
         std::map<uint32, InventoryItemRef>::const_iterator cur, end;
-		uint32 total_item_count = (uint32)m_items.size();
+		uint32 total_item_count = m_items.size();
 		uint32 items_saved = 0;
 		float current_percent_items_saved = 0.0;
         cur = m_items.begin();

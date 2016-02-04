@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -133,7 +133,7 @@ public:
     uint32 GetCSPA() { return m_cspa; }
     uint32 GetTemporary() { return m_temporary; }
     uint32 GetMode() { return m_mode; }
-    uint32 GetMemberCount() { return (uint32)m_chars.size(); }
+    uint32 GetMemberCount() { return m_chars.size(); }
 
     void SetOwnerID(uint32 ownerID) { m_ownerID = ownerID; }
     void SetType(Type new_type) { m_type = new_type; }

@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -881,11 +881,11 @@ void SystemManager::MakeSetState(const SystemBubble *bubble, DoDestiny_SetState 
     ss.Dump( DESTINY__TRACE, "    " );
     _log( DESTINY__TRACE, "    Buffer:" );
     _hex( DESTINY__TRACE, &( ss.destiny_state->content() )[0],
-		(uint32)ss.destiny_state->content().size() );
+                          ss.destiny_state->content().size() );
 
     _log( DESTINY__TRACE, "    Decoded:" );
     Destiny::DumpUpdate( DESTINY__TRACE, &( ss.destiny_state->content() )[0],
-                                         (uint32)ss.destiny_state->content().size() );
+                                         ss.destiny_state->content().size() );
 }
 
 ItemFactory& SystemManager::itemFactory() const

@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -300,7 +300,7 @@ public:
     {
         sha_update( sha_info,
                     reinterpret_cast< const SHA_BYTE* >( value.c_str() ),
-                    (int)value.size() * sizeof( wchar_t ) );
+                    value.size() * sizeof( wchar_t ) );
     }
 
     /* finish computing the SHA digest */

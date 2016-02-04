@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -327,7 +327,7 @@ bool TCPConnection::SendData( char* errbuf )
         mSendQueue.pop_front();
         mMSendQueue.Unlock();
 
-        int status = mSock->send( &(*buf)[ 0 ], (unsigned int)buf->size(), MSG_NOSIGNAL );
+        int status = mSock->send( &(*buf)[ 0 ], buf->size(), MSG_NOSIGNAL );
 
         if( status == SOCKET_ERROR )
         {
@@ -402,7 +402,7 @@ bool TCPConnection::RecvData( char* errbuf )
         else if( mRecvBuf->size() < TCPCONN_RECVBUF_SIZE )
             mRecvBuf->Resize<uint8>( TCPCONN_RECVBUF_SIZE );
 
-        int status = mSock->recv( &(*mRecvBuf)[ 0 ], (unsigned int)mRecvBuf->size(), 0 );
+        int status = mSock->recv( &(*mRecvBuf)[ 0 ], mRecvBuf->size(), 0 );
 
         if( status > 0 )
         {
@@ -497,7 +497,7 @@ void TCPConnection::TCPConnectionLoop()
 #endif /* HAVE_WINDOWS_H */
 
 #ifndef HAVE_WINDOWS_H
-    sLog.Log( "Threading", "Starting TCPConnectionLoop with thread ID %d", pthread_self() );
+    sLog.Log( "Threading", "Starting TCPConnectionLoop with thread ID %lu", pthread_self() );
 #endif /* !HAVE_WINDOWS_H */
 
     mMLoopRunning.Lock();
@@ -522,6 +522,6 @@ void TCPConnection::TCPConnectionLoop()
     mMLoopRunning.Unlock();
 
 #ifndef HAVE_WINDOWS_H
-    sLog.Log( "Threading", "Ending TCPConnectionLoop with thread ID %d", pthread_self() );
+    sLog.Log( "Threading", "Ending TCPConnectionLoop with thread ID %lu", pthread_self() );
 #endif /* !HAVE_WINDOWS_H */
 }

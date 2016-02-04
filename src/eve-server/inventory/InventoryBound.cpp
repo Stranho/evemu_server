@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -90,9 +90,9 @@ PyResult InventoryBound::Handle_ReplaceCharges(PyCallArgs &call) {
         return NULL;
     }
 
-    if(new_charge->quantity() < args.quantity) {
+    if(new_charge->quantity() < (uint32)args.quantity) {
         codelog(SERVICE__ERROR, "%s: Item %u: Requested quantity (%d) exceeds actual quantity (%d), using actual.", call.client->GetName(), args.itemID, args.quantity, new_charge->quantity());
-    } else if(new_charge->quantity() > args.quantity) {
+    } else if(new_charge->quantity() > (uint32)args.quantity) {
         new_charge = new_charge->Split(args.quantity);  // split item
         if( !new_charge ) {
             codelog(SERVICE__ERROR, "%s: Unable to split charge %d into %d", call.client->GetName(), args.itemID, args.quantity);

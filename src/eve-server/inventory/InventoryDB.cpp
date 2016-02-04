@@ -3,7 +3,7 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2011 The EVEmu Team
+    Copyright 2006 - 2016 The EVEmu Team
     For the latest information visit http://evemu.org
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
@@ -1578,7 +1578,7 @@ bool InventoryDB::LoadCertificates( uint32 characterID, Certificates &into )
         currentCertificates i;
         i.certificateID = row.GetUInt( 0 );
         i.grantDate = row.GetUInt64( 1 );
-		i.visibilityFlags = row.GetUInt(2) >= 0 ? true : false;
+        i.visibilityFlags = row.GetUInt( 2 );
 
         into.push_back( i );
     }

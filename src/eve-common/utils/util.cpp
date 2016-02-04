@@ -819,7 +819,7 @@ std::wstring Strings::StringToWString( std::string & str )
     /* convert from multi byte strings to wide character strings */
     std::wstring wstr;
     wstr.resize( str.size() );
-    size_t ret_len = mbstowcs( &wstr[0], str.c_str(), str.size() );
+    int ret_len = mbstowcs( &wstr[0], str.c_str(), str.size() );
 
     if (ret_len != str.size()) {
 
@@ -829,3 +829,8 @@ std::wstring Strings::StringToWString( std::string & str )
 }
 
 }//namespace Utils
+
+long CurrentBlueTime() {
+    long sec_since_epoch = time(0);
+    return (sec_since_epoch*10000000L)+116444736000000000L;
+}
